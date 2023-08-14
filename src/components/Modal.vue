@@ -1,14 +1,20 @@
 <template>
-  <div class="backdrop">
-    <div class="modal">
-      <p>Modal content</p>
+  <div class="backdrop" @click.self="closeModal">
+    <div class="modal" :class="{ success:theme==='success' ,danger:theme==='delete'}">
+      <slot/>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name:"ModalA"
+  props:['theme'],
+  name:"ModalA",
+  methods:{
+    closeModal(){
+      this.$emit("close");
+    }
+  }
 }
 </script>
 
@@ -27,4 +33,13 @@ export default {
     background-color: aliceblue;
     border-radius: 10px;
   }
+  .success{
+    background-color: green;
+    color: white;
+  }
+  .danger{
+      background-color: rgb(128, 0, 0);
+    color: white;
+  }
+  
 </style>
